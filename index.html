@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eunchae's Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --accent-color: #58a6ff;
+            --card-bg: #161b22;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 { color: var(--accent-color); }
+        .profile-img { width: 100%; max-width: 800px; border-radius: 10px; margin-bottom: 20px; }
+        .section { margin-bottom: 60px; }
+        
+        /* 프로젝트 카드 스타일 */
+        .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .project-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #30363d;
+            transition: transform 0.2s;
+        }
+        .project-card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
+        .tag {
+            display: inline-block;
+            background: #238636;
+            color: white;
+            font-size: 0.8rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        /* 뱃지 정렬 */
+        .badge-group { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+        .stats-img { max-width: 100%; height: auto; margin-top: 10px; }
+
+        footer { text-align: center; padding: 40px; font-size: 0.9rem; color: #8b949e; }
+        @media (max-width: 768px) { .project-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="https://i.pinimg.com/originals/ac/a8/f0/aca8f0361de3c872cbb0fc4acf0a4009.png" alt="Header Banner" class="profile-img">
+    <h1>🚀 Welcome to eunchae's Space</h1>
+    <p>정보통신공학 전공 | 프론트엔드 개발자 지망생</p>
+</header>
+
+<div class="container">
+
+    <section class="section">
+        <h2>🛠️ Tech Stack</h2>
+        <div class="badge-group">
+            <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black">
+            <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=Vite&logoColor=white">
+            <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black">
+            <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white">
+        </div>
+        <div class="badge-group">
+            <img src="https://img.shields.io/badge/C-A8B9CC?style=for-the-badge&logo=C&logoColor=white">
+            <img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=C%2B%2B&logoColor=white">
+            <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white">
+            <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white">
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>📁 Featured Projects</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <span class="tag">Hybrid App</span>
+                <h3>무쉼사</h3>
+                <p>무더위 쉼터 안내 및 내비게이션 앱. Kotlin 네이티브와 React의 하이브리드 연동.</p>
+                <small>2025.08 - 2025.11</small>
+            </div>
+            <div class="project-card">
+                <span class="tag">Web</span>
+                <h3>카카오톡 선물하기 클론</h3>
+                <p>React를 활용한 대규모 커머스 UI/UX 및 SPA 구조 구현 프로젝트.</p>
+                <small>2025.06 - 2025.07</small>
+            </div>
+            <div class="project-card">
+                <span class="tag">Algorithm</span>
+                <h3>Keyword Searcher</h3>
+                <p>Python을 이용한 다중 폴더 내 텍스트 데이터 자동 검색 프로그램.</p>
+                <small>2025-2학기</small>
+            </div>
+            <div class="project-card">
+                <span class="tag">HW Control</span>
+                <h3>라인 트래킹 시스템</h3>
+                <p>C언어와 Keil IDE를 활용한 센서 기반 하드웨어 주행 제어.</p>
+                <small>2025.11 - 2025.12</small>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>📊 Statistics</h2>
+        <div style="text-align: center;">
+            <img src="https://github-readme-stats.vercel.app/api?username=eunchae-04&theme=dark&show_icons=true" class="stats-img">
+            <br>
+            <a href="https://solved.ac/eunchae04">
+                <img src="http://mazassumnida.wtf/api/v2/generate_badge?boj=eunchae04&theme=dark" class="stats-img">
+            </a>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <p>© 2026 eunchae-04. Built with 💖 and GitHub Pages.</p>
+</footer>
+
+</body>
+</html>
