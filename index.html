@@ -5,21 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eunchae's Space</title>
     <style>
+        /* 테마별 변수 설정 */
         :root {
+            /* Dark Mode (Default) */
             --bg-color: #0d1117;
             --text-color: #c9d1d9;
             --accent-color: #58a6ff;
             --card-bg: #161b22;
             --border-color: #30363d;
             --hover-color: #1c2128;
+            --star-color: #ffffff;
         }
 
-        /* 부드러운 등장 애니메이션 */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        [data-theme="light"] {
+            /* Light Mode */
+            --bg-color: #f6f8fa;
+            --text-color: #24292f;
+            --accent-color: #0969da;
+            --card-bg: #ffffff;
+            --border-color: #d0d7de;
+            --hover-color: #f3f4f6;
+            --star-color: #58a6ff;
         }
 
+        /* 기본 레이아웃 */
         body {
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
             background-color: var(--bg-color);
@@ -27,13 +36,49 @@
             line-height: 1.8;
             margin: 0;
             padding: 0;
-            word-break: keep-all;
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+
+        /* 별 배경 애니메이션 */
+        #star-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background-color: var(--star-color);
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+
+        /* 테마 스위치 버튼 */
+        #theme-toggle {
+            position: fixed;
+            top: 20px; right: 20px;
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-color);
+            cursor: pointer;
+            z-index: 100;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         header {
             text-align: center;
             padding: 100px 20px;
-            background: radial-gradient(circle at top, #1c2128 0%, #0d1117 100%);
             animation: fadeInUp 0.8s ease-out;
         }
 
@@ -62,33 +107,19 @@
             border-bottom: 2px solid var(--border-color);
             padding-bottom: 10px;
             margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        .project-list {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .project-list a {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            transition: transform 0.3s ease;
-        }
+        /* 프로젝트 카드 */
+        .project-list { display: flex; flex-direction: column; gap: 25px; }
+        .project-list a { text-decoration: none; color: inherit; display: block; }
 
         .project-card {
             background-color: var(--card-bg);
             padding: 30px;
             border-radius: 16px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
         }
 
         .project-card:hover {
@@ -99,196 +130,171 @@
 
         .tag {
             display: inline-block;
-            background: rgba(35, 134, 54, 0.2);
-            color: #3fb950;
+            background: rgba(88, 166, 255, 0.1);
+            color: var(--accent-color);
             font-size: 0.75rem;
             font-weight: 600;
             padding: 4px 12px;
             border-radius: 20px;
-            border: 1px solid rgba(63, 185, 80, 0.3);
             margin-bottom: 15px;
         }
 
-        .project-card h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.4rem;
-        }
+        /* 기술 스택 */
+        .badge-group { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+        .badge-group img { transition: transform 0.2s; }
+        .badge-group img:hover { transform: translateY(-3px); }
 
-        .project-card p {
-            margin: 0;
-            color: #8b949e;
-            font-size: 1rem;
-        }
-
-        .period {
-            font-size: 0.85rem;
-            color: #6e7681;
-            display: block;
-            margin-top: 15px;
-            font-weight: 500;
-        }
-
-        /* 기술 스택 좌측 정렬 수정 */
-        .badge-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-            justify-content: flex-start; /* 좌측 정렬 */
-        }
-
-        .badge-group img {
-            transition: transform 0.2s;
-        }
-
-        .badge-group img:hover {
-            transform: translateY(-3px);
-        }
-
-        /* 통계 가로 나열 수정 */
+        /* 통계 영역 */
         .stats-wrapper {
-            display: flex;
-            gap: 20px;
-            justify-content: space-between;
-            align-items: stretch;
-            flex-wrap: wrap; /* 화면 좁아지면 아래로 내려감 */
+            display: flex; gap: 20px; justify-content: space-between; flex-wrap: wrap;
         }
-
         .stats-container {
-            flex: 1;
-            min-width: 300px; /* 최소 너비 설정 */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
+            flex: 1; min-width: 300px;
+            display: flex; justify-content: center; align-items: center;
+            background: var(--card-bg); padding: 20px;
+            border-radius: 16px; border: 1px solid var(--border-color);
+        }
+        .stats-img { max-width: 100%; height: auto; }
+
+        footer { text-align: center; padding: 60px 20px; border-top: 1px solid var(--border-color); color: #6e7681; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .stats-img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 60px 20px;
-            font-size: 0.9rem;
-            color: #6e7681;
-            border-top: 1px solid var(--border-color);
-        }
-
-        @media (max-width: 768px) {
-            .stats-wrapper {
-                flex-direction: column;
-            }
-            .stats-container {
-                min-width: unset;
-            }
-        }
-
-        @media (max-width: 600px) {
-            header { padding: 60px 20px; }
-            header h1 { font-size: 1.8rem; }
-            .project-card { padding: 20px; }
-        }
+        @media (max-width: 768px) { .stats-wrapper { flex-direction: column; } }
     </style>
 </head>
-<body>
+<body data-theme="dark">
 
-<header>
-    <h1>🚀 EunChae Portfolio</h1>
-    <p style="color: #8b949e; font-size: 1.1rem;">충남대학교 전파정보통신공학과</p>
-</header>
+    <div id="star-container"></div>
+    <button id="theme-toggle">🌙</button>
 
-<div class="container">
-    <section class="section">
-        <h2>📁 Projects</h2>
-        <div class="project-list">
-            <a href="https://github.com/eunchae-04/PokemonDex" target="_blank">
-                <div class="project-card">
-                    <span class="tag">Web Service</span>
-                    <h3>1️⃣ 포켓몬 도감 (PokemonDex)</h3>
-                    <p>포켓몬 API를 활용하여 데이터를 시각화하고 검색 기능을 제공하는 웹 애플리케이션입니다.</p>
-                    <span class="period">🗓️ 2025.05.19 ~ 2025.05.25</span>
-                </div>
-            </a>
+    <header>
+        <h1>🚀 EunChae Portfolio</h1>
+        <p>충남대학교 전파정보통신공학과</p>
+    </header>
 
-            <a href="https://github.com/eunchae-04/react-gift-product-detail" target="_blank">
-                <div class="project-card">
-                    <span class="tag">Clone Coding</span>
-                    <h3>2️⃣ Kakao Gift Page Clone</h3>
-                    <p>카카오톡 선물하기 페이지의 UI/UX를 React를 활용해 정밀하게 클론 코딩한 프로젝트입니다.</p>
-                    <span class="period">🗓️ 2025.06.23 ~ 2025.08.01</span>
-                </div>
-            </a>
-
-            <a href="https://github.com/eunchae-04/react-gift-Team19_FE" target="_blank">
-                <div class="project-card">
-                    <span class="tag">Hybrid App</span>
-                    <h3>3️⃣ 무쉼사: 무더위 쉼터를 찾는 사람들</h3>
-                    <p>폭염 대비 무더위 쉼터 정보와 실시간 길안내를 제공하는 하이브리드 내비게이션 서비스입니다.</p>
-                    <span class="period">🗓️ 2025.08 ~ 2025.11</span>
-                </div>
-            </a>
-
-            <a href="https://github.com/eunchae-04/Line-tracking" target="_blank">
-                <div class="project-card">
-                    <span class="tag">Embedded System</span>
-                    <h3>4️⃣ TM4C123G Line Tracer</h3>
-                    <p>Embedded 시스템 기반으로 센서 데이터를 처리하여 주행하는 라인트레이서 로봇을 제작했습니다.</p>
-                    <span class="period">🗓️ 2025.11 ~ 2025.12</span>
-                </div>
-            </a>
-
-            <a href="https://github.com/eunchae-04/algorithms" target="_blank">
-                <div class="project-card">
-                    <span class="tag">Algorithm</span>
-                    <h3>5️⃣ Algorithm File Searcher</h3>
-                    <p>다중 폴더 내에서 특정 키워드를 효율적으로 탐색하는 알고리즘 기반 검색 프로그램입니다.</p>
-                    <span class="period">🗓️ 2025.11 ~ 2025.12</span>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section class="section">
-        <h2>🛠️ Tech Stack</h2>
-        <div class="badge-group">
-            <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black">
-            <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white">
-            <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black">
-            <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=Vite&logoColor=white">
-        </div>
-        <div class="badge-group">
-            <img src="https://img.shields.io/badge/C-A8B9CC?style=for-the-badge&logo=C&logoColor=white">
-            <img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=C%2B%2B&logoColor=white">
-            <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white">
-            <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white">
-        </div>
-    </section>
-
-    <section class="section">
-        <h2>📊 Statistics</h2>
-        <div class="stats-wrapper">
-            <div class="stats-container">
-                <img src="https://github-readme-stats.vercel.app/api?username=eunchae-04&theme=dark&show_icons=true&hide_border=true&bg_color=161b22" class="stats-img">
-            </div>
-            <div class="stats-container">
-                <a href="https://solved.ac/eunchae04" target="_blank">
-                    <img src="http://mazassumnida.wtf/api/v2/generate_badge?boj=eunchae04&theme=dark" class="stats-img">
+    <div class="container">
+        <section class="section">
+            <h2>📁 Projects</h2>
+            <div class="project-list">
+                <a href="https://github.com/eunchae-04/PokemonDex" target="_blank">
+                    <div class="project-card">
+                        <span class="tag">Web Service</span>
+                        <h3>1️⃣ 포켓몬 도감 (PokemonDex)</h3>
+                        <p>포켓몬 API를 활용하여 데이터를 시각화하고 검색 기능을 제공하는 웹 애플리케이션입니다.</p>
+                        <span class="period">🗓️ 2025.05.19 ~ 2025.05.25</span>
+                    </div>
+                </a>
+                <a href="https://github.com/eunchae-04/react-gift-product-detail" target="_blank">
+                    <div class="project-card">
+                        <span class="tag">Clone Coding</span>
+                        <h3>2️⃣ Kakao Gift Page Clone</h3>
+                        <p>카카오톡 선물하기 페이지의 UI/UX를 React를 활용해 정밀하게 클론 코딩한 프로젝트입니다.</p>
+                        <span class="period">🗓️ 2025.06.23 ~ 2025.08.01</span>
+                    </div>
+                </a>
+                <a href="https://github.com/eunchae-04/react-gift-Team19_FE" target="_blank">
+                    <div class="project-card">
+                        <span class="tag">Hybrid App</span>
+                        <h3>3️⃣ 무쉼사: 무더위 쉼터를 찾는 사람들</h3>
+                        <p>폭염 대비 무더위 쉼터 정보와 실시간 길안내를 제공하는 하이브리드 내비게이션 서비스입니다.</p>
+                        <span class="period">🗓️ 2025.08 ~ 2025.11</span>
+                    </div>
+                </a>
+                <a href="https://github.com/eunchae-04/Line-tracking" target="_blank">
+                    <div class="project-card">
+                        <span class="tag">Embedded System</span>
+                        <h3>4️⃣ TM4C123G Line Tracer</h3>
+                        <p>Embedded 시스템 기반으로 센서 데이터를 처리하여 주행하는 라인트레이서 로봇 제작.</p>
+                        <span class="period">🗓️ 2025.11 ~ 2025.12</span>
+                    </div>
+                </a>
+                <a href="https://github.com/eunchae-04/algorithms" target="_blank">
+                    <div class="project-card">
+                        <span class="tag">Algorithm</span>
+                        <h3>5️⃣ Algorithm File Searcher</h3>
+                        <p>다중 폴더 내에서 특정 키워드를 효율적으로 탐색하는 검색 프로그램입니다.</p>
+                        <span class="period">🗓️ 2025.11 ~ 2025.12</span>
+                    </div>
                 </a>
             </div>
-        </div>
-    </section>
-</div>
+        </section>
 
-<footer>
-    <p>© 2026 eunchae-04. GitHub Pages.</p>
-</footer>
+        <section class="section">
+            <h2>🛠️ Tech Stack</h2>
+            <div class="badge-group">
+                <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black">
+                <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white">
+                <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black">
+                <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=Vite&logoColor=white">
+            </div>
+            <div class="badge-group">
+                <img src="https://img.shields.io/badge/C-A8B9CC?style=for-the-badge&logo=C&logoColor=white">
+                <img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=C%2B%2B&logoColor=white">
+                <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white">
+                <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white">
+            </div>
+        </section>
 
+        <section class="section">
+            <h2>📊 Statistics</h2>
+            <div class="stats-wrapper">
+                <div class="stats-container">
+                    <img src="https://github-readme-stats.vercel.app/api?username=eunchae-04&theme=dark&show_icons=true&hide_border=true&bg_color=161b22" class="stats-img">
+                </div>
+                <div class="stats-container">
+                    <a href="https://solved.ac/eunchae04" target="_blank">
+                        <img src="http://mazassumnida.wtf/api/v2/generate_badge?boj=eunchae04&theme=dark" class="stats-img">
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2026 eunchae-04. Built with Starry Night.</p>
+    </footer>
+
+    <script>
+        // 1. 별 생성 스크립트
+        const starContainer = document.getElementById('star-container');
+        const starCount = 100;
+
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            
+            // 랜덤 위치 및 애니메이션 속도
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            const size = Math.random() * 3 + 1;
+            const duration = Math.random() * 3 + 2;
+            const delay = Math.random() * 5;
+
+            star.style.left = `${x}%`;
+            star.style.top = `${y}%`;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.setProperty('--duration', `${duration}s`);
+            star.style.animationDelay = `${delay}s`;
+
+            starContainer.appendChild(star);
+        }
+
+        // 2. 테마 전환 스크립트
+        const toggleBtn = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        toggleBtn.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            toggleBtn.innerHTML = newTheme === 'dark' ? '🌙' : '☀️';
+        });
+    </script>
 </body>
 </html>
