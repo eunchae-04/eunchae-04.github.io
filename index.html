@@ -6,7 +6,8 @@
     <title>Eunchae's Space</title>
     <meta property="og:title" content="Eunchae's Space | Portfolio">
     <meta property="og:description" content="충남대학교 전파정보통신공학과 고은채의 포트폴리오입니다.">
-    <meta property="og:image" content="https://eunchae-04.github.io/image.png"> <meta property="og:url" content="https://eunchae-04.github.io/">
+    <meta property="og:image" content="https://eunchae-04.github.io/image.png"> 
+    <meta property="og:url" content="https://eunchae-04.github.io/">
     <meta property="og:type" content="website">
 
     <meta name="twitter:card" content="summary_large_image">
@@ -212,7 +213,6 @@
             content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2.5px; background-color: var(--accent-color);
         }
 
-        /* 탭 콘텐츠 전환 효과 */
         .tab-content { 
             display: none; 
             opacity: 0; 
@@ -248,15 +248,30 @@
         
         .card-period { font-size: 1.0rem; color: #58a6ff; display: block; margin-top: 15px; font-weight: 600; }
 
-        .project-tech-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+        .tech-tags, .project-tech-stack { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 8px; 
+            margin-top: 15px;
+            margin-bottom: 12px; 
+        }
+        .tech-tags img, .project-tech-stack img { height: 26px; }
+
+        .tech-desc { display: block; margin-top: 12px; }
+
         .custom-badge {
             font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 6px;
             background-color: var(--badge-bg); color: var(--badge-text); border: 1px solid var(--badge-border);
         }
 
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-        .tech-tags img, .project-tech-stack img { height: 26px; }
-        .tech-desc { display: block; margin-top: 12px; }
+        /* 🏆 알고리즘 상세 지표 스타일 */
+        .algo-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .algo-stats img { height: auto !important; max-width: 100%; }
 
         footer { text-align: center; padding: 60px 20px; border-top: 1px solid var(--border-color); color: #6e7681; }
 
@@ -273,7 +288,7 @@
         }
     </style>
 </head>
-<body data-theme="dark">
+<body>
 
     <div id="star-container"></div>
     <button id="theme-toggle">🌙</button>
@@ -339,6 +354,22 @@
                             <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=Vercel&logoColor=white">
                         </div>
                         <span class="tech-desc">배포 자동화 및 CI/CD 파이프라인 구축 및 호스팅이 가능합니다.</span>
+                    </div>
+                    <div class="tech-box">
+                        <h3>🏆 Problem Solving</h3>
+                        <div class="tech-tags">
+                            <a href="https://solved.ac/eunchae04" target="_blank">
+                                <img src="https://img.shields.io/badge/Baekjoon-0076C0?style=for-the-badge&logo=Baekjoon&logoColor=white">
+                            </a>
+                            <img src="https://img.shields.io/badge/Programmers-000521?style=for-the-badge&logo=Programmers&logoColor=white">
+                        </div>
+                        <div class="algo-stats">
+                            <a href="https://solved.ac/eunchae04" target="_blank">
+                                <img src="http://mazassumnida.wtf/api/v2/generate_badge?boj=eunchae04" alt="Baekjoon Tier">
+                            </a>
+                            
+                        </div>
+                        <span class="tech-desc">효율적인 알고리즘 설계와 논리적 문제 해결 과정을 즐깁니다.</span>
                     </div>
                 </div>
             </div>
@@ -440,12 +471,10 @@
             window.location.href = `mailto:${email}?subject=[Portfolio Inquiry] 안녕하세요 고은채님!`;
         }
 
-        // 애니메이션 지원을 위한 openTab 함수 수정
         function openTab(evt, tabName) {
             const tabcontent = document.getElementsByClassName("tab-content");
             const tablinks = document.getElementsByClassName("tab-btn");
 
-            // 모든 탭의 active 클래스를 즉시 제거하여 초기화
             for (let i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].classList.remove("active");
                 tabcontent[i].style.display = "none";
@@ -454,11 +483,9 @@
                 tablinks[i].classList.remove("active");
             }
 
-            // 선택된 탭 표시
             const targetTab = document.getElementById(tabName);
             targetTab.style.display = "block";
             
-            // 약간의 지연을 주어 CSS 트랜지션(Fade-in)이 작동하게 함
             setTimeout(() => {
                 targetTab.classList.add("active");
             }, 10);
