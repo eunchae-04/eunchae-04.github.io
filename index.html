@@ -78,7 +78,7 @@
             animation: fadeInUp 0.8s ease-out;
         }
 
-        /* 🛠️ 타이핑 애니메이션 */
+        /* 타이핑 애니메이션 */
         @keyframes typing-fix { from { max-width: 0; } to { max-width: 100%; } }
         @keyframes blink { from, to { border-color: transparent } 50% { border-color: var(--accent-color) } }
 
@@ -107,11 +107,11 @@
                 blink 0.8s infinite;
         }
 
-        /* 🛠️ [핵심수정] 타이핑 종료 후(4.2s 뒤) 나타나도록 딜레이 설정 */
+        /* 타이핑 종료 후(1.5s 뒤) 나타나도록 딜레이 설정 */
         .header-sub-info {
             margin-top: 10px;
             opacity: 0; /* 처음엔 숨김 */
-            animation: fadeInUp 1s ease-out 4.2s forwards;
+            animation: fadeInUp 1s ease-out 1.5s forwards;
         }
 
         .info-text {
@@ -242,7 +242,7 @@
             <div class="info-text">충남대학교 전파정보통신공학과<br>고은채</div>
             
             <div class="contact-links">
-                <a href="mailto:은채님메일@gmail.com" class="icon-btn" title="Email">
+                <a href="mailto:eunchae@o.cnu.ac.kr" class="icon-btn" title="Email">
                     <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                 </a>
                 <a href="https://github.com/eunchae-04" target="_blank" class="icon-btn" title="GitHub">
