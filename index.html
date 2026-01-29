@@ -27,6 +27,8 @@
             --badge-bg: rgba(88, 166, 255, 0.1);
             --badge-text: #58a6ff;
             --badge-border: rgba(88, 166, 255, 0.3);
+            --secondary-text: #8b949e;
+            --period-color: #58a6ff;
         }
 
         [data-theme="light"] {
@@ -41,6 +43,8 @@
             --badge-bg: rgba(9, 105, 218, 0.08);
             --badge-text: #0969da;
             --badge-border: rgba(9, 105, 218, 0.2);
+            --secondary-text: #424a53;
+            --period-color: #0969da;
         }
 
         body {
@@ -200,7 +204,7 @@
 
         .tab-btn {
             flex: 1; 
-            background: none; border: none; color: #8b949e;
+            background: none; border: none; color: var(--secondary-text);
             padding: 15px 0; 
             font-size: 1.15rem;
             font-weight: 620; 
@@ -244,9 +248,9 @@
         }
         
         .base-card h3, .tech-box h3 { margin: 0 0 10px 0; font-size: 1.4rem; color: var(--text-color); font-weight: 700; }
-        .base-card p, .tech-desc { margin: 0; color: #8b949e; font-size: 1.1rem; line-height: 1.6; }
+        .base-card p, .tech-desc { margin: 0; color: var(--secondary-text); font-size: 1.1rem; line-height: 1.6; }
         
-        .card-period { font-size: 1.0rem; color: #58a6ff; display: block; margin-top: 15px; font-weight: 600; }
+        .card-period { font-size: 1.0rem; color: var(--period-color); display: block; margin-top: 15px; font-weight: 600; }
 
         .tech-tags, .project-tech-stack { 
             display: flex; 
