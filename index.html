@@ -9,6 +9,7 @@
             --bg-color: #0d1117;
             --text-color: #c9d1d9;
             --accent-color: #58a6ff;
+            --secondary-accent: #bc8cff;
             --card-bg: #161b22;
             --border-color: #30363d;
             --hover-color: #1c2128;
@@ -19,6 +20,7 @@
             --bg-color: #f6f8fa;
             --text-color: #24292f;
             --accent-color: #0969da;
+            --secondary-accent: #8250df;
             --card-bg: #ffffff;
             --border-color: #d0d7de;
             --hover-color: #f3f4f6;
@@ -76,42 +78,36 @@
             animation: fadeInUp 0.8s ease-out;
         }
 
-        /* 타이핑 애니메이션 */
-        @keyframes typing-fix {
-            from { max-width: 0; }
-            to { max-width: 100%; }
-        }
-        @keyframes blink {
-            from, to { border-color: transparent }
-            50% { border-color: var(--accent-color) }
-        }
+        @keyframes typing-fix { from { max-width: 0; } to { max-width: 100%; } }
+        @keyframes blink { from, to { border-color: transparent } 50% { border-color: var(--accent-color) } }
 
-        .typing-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 10px;
-        }
-
+        .typing-container { display: flex; flex-direction: column; align-items: center; gap: 15px; }
         .typing-title {
             font-size: 3rem;
             font-family: 'Courier New', Courier, monospace;
             font-weight: bold;
-            background: linear-gradient(to right, #58a6ff, #bc8cff);
+            background: linear-gradient(to right, var(--accent-color), var(--secondary-accent));
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            
             overflow: hidden;
             white-space: nowrap;
-            border-right: 4px solid var(--accent-color); /* 커서 두께 살짝 보정 */
-            
+            border-right: 4px solid var(--accent-color);
             width: max-content; 
             max-width: 0;
-            
-            /* ⏱️ 속도 조절: 4.5s로 더 늦추고, steps(17)로 각 알파벳을 하나씩 끊어서 표현 */
-            animation: 
-                typing-fix 4.5s steps(17, end) forwards,
-                blink 0.8s infinite;
+            animation: typing-fix 3s steps(17, end) forwards, blink 0.8s infinite;
+        }
+
+        .typing-info {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-color);
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid var(--secondary-accent);
+            width: max-content;
+            max-width: 0;
+            animation: typing-fix 2.5s steps(20, end) 2s forwards, blink 0.8s infinite 2s;
         }
 
         .container {
@@ -132,10 +128,59 @@
             margin-bottom: 30px;
         }
 
-        .project-list { display: flex; flex-direction: column; gap: 25px; }
-        .project-list a { text-decoration: none; color: inherit; display: block; }
+        /* 🛠️ Tab System Styles */
+        .tab-menu {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
 
-        .project-card {
+        .tab-btn {
+            background: none;
+            border: none;
+            color: #8b949e;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .tab-btn.active {
+            color: var(--accent-color);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Project & Awards Cards */
+        .project-list, .experience-list { display: flex; flex-direction: column; gap: 25px; }
+        .project-list a, .experience-list .exp-card { text-decoration: none; color: inherit; display: block; }
+
+        .project-card, .exp-card {
             background-color: var(--card-bg);
             padding: 30px;
             border-radius: 16px;
@@ -144,7 +189,7 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .project-card:hover {
+        .project-card:hover, .exp-card:hover {
             transform: translateY(-5px);
             background-color: var(--hover-color);
             border-color: var(--accent-color);
@@ -161,14 +206,11 @@
             margin-bottom: 15px;
         }
 
-        .project-card h3 { margin: 0 0 10px 0; font-size: 1.4rem; }
-        .project-card p { margin: 0; color: #8b949e; font-size: 1.2rem; font-weight: 600; }
-        .period { font-size: 1rem; color: #58a6ff; display: block; margin-top: 15px; font-weight: 550; }
+        .project-card h3, .exp-card h3 { margin: 0 0 10px 0; font-size: 1.4rem; }
+        .period { font-size: 1rem; color: #58a6ff; display: block; margin-top: 15px; font-weight: 600; }
 
+        /* Badge & Stats */
         .badge-group { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; justify-content: flex-start; }
-        .badge-group img { transition: transform 0.2s; }
-        .badge-group img:hover { transform: translateY(-3px); }
-
         .stats-wrapper { display: flex; gap: 20px; justify-content: space-between; flex-wrap: wrap; }
         .stats-container {
             flex: 1; min-width: 300px;
@@ -180,12 +222,13 @@
 
         footer { text-align: center; padding: 60px 20px; border-top: 1px solid var(--border-color); color: #6e7681; }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        @media (max-width: 768px) { .stats-wrapper { flex-direction: column; } }
+        @media (max-width: 768px) { 
+            .stats-wrapper { flex-direction: column; } 
+            .typing-title { font-size: 2rem; }
+            .typing-info { font-size: 1.1rem; }
+        }
     </style>
 </head>
 <body data-theme="dark">
@@ -196,54 +239,71 @@
     <header>
         <div class="typing-container">
             <h1 class="typing-title">EunChae Portfolio</h1>
+            <div class="typing-info">충남대학교 전파정보통신공학과 고은채</div>
         </div>
-        <p style="color: #8b949e; font-size: 1.5rem; font-weight: 800;">충남대학교 전파정보통신공학과</br>고은채</p>
     </header>
 
     <div class="container">
         <section class="section">
-            <h2>📁 Projects</h2>
-            <div class="project-list">
-                <a href="https://github.com/eunchae-04/PokemonDex" target="_blank">
-                    <div class="project-card">
-                        <span class="tag">Web Service</span>
-                        <h3>1️⃣ 포켓몬 도감 (PokemonDex)</h3>
-                        <p>포켓몬 API를 활용하여 데이터를 시각화하고 검색 기능을 제공하는 웹 애플리케이션.</p>
-                        <span class="period">🗓️ 2025.05.19 ~ 2025.05.25</span>
+            <div class="tab-menu">
+                <button class="tab-btn active" onclick="openTab(event, 'projects')">📁 Projects</button>
+                <button class="tab-btn" onclick="openTab(event, 'experience')">🏆 Awards & Activities</button>
+            </div>
+
+            <div id="projects" class="tab-content active">
+                <div class="project-list">
+                    <a href="https://github.com/eunchae-04/PokemonDex" target="_blank">
+                        <div class="project-card">
+                            <span class="tag">Web Service</span>
+                            <h3>1️⃣ 포켓몬 도감 (PokemonDex)</h3>
+                            <p style="color: #8b949e; font-size: 1.1rem;">포켓몬 API를 활용하여 데이터를 시각화하고 검색 기능을 제공하는 웹 애플리케이션.</p>
+                            <span class="period">🗓️ 2025.05.19 ~ 2025.05.25</span>
+                        </div>
+                    </a>
+                    <a href="https://github.com/eunchae-04/react-gift-product-detail" target="_blank">
+                        <div class="project-card">
+                            <span class="tag">Clone Coding</span>
+                            <h3>2️⃣ Kakao Gift Page Clone</h3>
+                            <p style="color: #8b949e; font-size: 1.1rem;">카카오톡 선물하기 페이지의 UI/UX를 React를 활용해 정밀하게 클론 코딩한 프로젝트.</p>
+                            <span class="period">🗓️ 2025.06.23 ~ 2025.08.01</span>
+                        </div>
+                    </a>
+                    <a href="https://github.com/eunchae-04/react-gift-Team19_FE" target="_blank">
+                        <div class="project-card">
+                            <span class="tag">Hybrid App</span>
+                            <h3>3️⃣ 무쉼사: 무더위 쉼터를 찾는 사람들</h3>
+                            <p style="color: #8b949e; font-size: 1.1rem;">폭염 대비 무더위 쉼터 정보와 실시간 길안내를 제공하는 하이브리드 내비게이션 서비스.</p>
+                            <span class="period">🗓️ 2025.08 ~ 2025.11</span>
+                        </div>
+                    </a>
+                    <a href="https://github.com/eunchae-04/Line-tracking" target="_blank">
+                        <div class="project-card">
+                            <span class="tag">Embedded System</span>
+                            <h3>4️⃣ TM4C123G Line Tracer</h3>
+                            <p style="color: #8b949e; font-size: 1.1rem;">Embedded 시스템 기반으로 센서 데이터를 처리하여 주행하는 라인트레이서 제작.</p>
+                            <span class="period">🗓️ 2025.11 ~ 2025.12</span>
+                        </div>
+                    </a>
+                    <a href="https://github.com/eunchae-04/algorithms" target="_blank">
+                        <div class="project-card">
+                            <span class="tag">Algorithm</span>
+                            <h3>5️⃣ Algorithm File Searcher</h3>
+                            <p style="color: #8b949e; font-size: 1.1rem;">다중 폴더 내에서 특정 키워드를 효율적으로 탐색하는 검색 프로그램.</p>
+                            <span class="period">🗓️ 2025.11 ~ 2025.12</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div id="experience" class="tab-content">
+                <div class="experience-list">
+                    <div class="exp-card">
+                        <span class="tag">Activity</span>
+                        <h3>💡 대외활동 또는 수상 명칭을 적어주세요</h3>
+                        <p style="color: #8b949e; font-size: 1.1rem;">활동 내용이나 수상에 대한 간단한 설명을 여기에 입력하세요.</p>
+                        <span class="period">🗓️ 202X.XX ~ 202X.XX</span>
                     </div>
-                </a>
-                <a href="https://github.com/eunchae-04/react-gift-product-detail" target="_blank">
-                    <div class="project-card">
-                        <span class="tag">Clone Coding</span>
-                        <h3>2️⃣ Kakao Gift Page Clone</h3>
-                        <p>카카오톡 선물하기 페이지의 UI/UX를 React를 활용해 정밀하게 클론 코딩한 프로젝트.</p>
-                        <span class="period">🗓️ 2025.06.23 ~ 2025.08.01</span>
                     </div>
-                </a>
-                <a href="https://github.com/eunchae-04/Team19_FE" target="_blank">
-                    <div class="project-card">
-                        <span class="tag">Hybrid App</span>
-                        <h3>3️⃣ 무쉼사: 무더위 쉼터를 찾는 사람들</h3>
-                        <p>폭염 대비 무더위 쉼터 정보와 실시간 길안내를 제공하는 하이브리드 내비게이션 서비스.</p>
-                        <span class="period">🗓️ 2025.08 ~ 2025.11</span>
-                    </div>
-                </a>
-                <a href="https://github.com/eunchae-04/Line-tracking" target="_blank">
-                    <div class="project-card">
-                        <span class="tag">Embedded System</span>
-                        <h3>4️⃣ TM4C123G Line Tracer</h3>
-                        <p>Embedded 시스템 기반으로 센서 데이터를 처리하여 주행하는 라인트레이서 제작.</p>
-                        <span class="period">🗓️ 2025.11 ~ 2025.12</span>
-                    </div>
-                </a>
-                <a href="https://github.com/eunchae-04/algorithms" target="_blank">
-                    <div class="project-card">
-                        <span class="tag">Algorithm</span>
-                        <h3>5️⃣ Algorithm File Searcher</h3>
-                        <p>다중 폴더 내에서 특정 키워드를 효율적으로 탐색하는 검색 프로그램.</p>
-                        <span class="period">🗓️ 2025.11 ~ 2025.12</span>
-                    </div>
-                </a>
             </div>
         </section>
 
@@ -283,6 +343,24 @@
     </footer>
 
     <script>
+        // 1. 탭 전환 기능
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.className += " active";
+        }
+
+        // 2. 별 생성
         const starContainer = document.getElementById('star-container');
         const starCount = 100;
         for (let i = 0; i < starCount; i++) {
@@ -293,14 +371,14 @@
             const size = Math.random() * 3 + 1;
             const duration = Math.random() * 3 + 2;
             const delay = Math.random() * 5;
-            star.style.left = `${x}%`;
-            star.style.top = `${y}%`;
-            star.style.width = `${size}px`;
-            star.style.height = `${size}px`;
+            star.style.left = `${x}%`; star.style.top = `${y}%`;
+            star.style.width = `${size}px`; star.style.height = `${size}px`;
             star.style.setProperty('--duration', `${duration}s`);
             star.style.animationDelay = `${delay}s`;
             starContainer.appendChild(star);
         }
+
+        // 3. 테마 전환
         const toggleBtn = document.getElementById('theme-toggle');
         const body = document.body;
         toggleBtn.addEventListener('click', () => {
