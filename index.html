@@ -180,14 +180,14 @@
             animation: fadeInUp 1s ease-out;
         }
 
-        h2 {
-            font-size: 1.8rem;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 10px;
-            margin-bottom: 30px;
+        .tab-menu { 
+            display: flex; 
+            gap: 10px; 
+            margin-bottom: 30px; 
+            border-bottom: 1px solid var(--border-color); 
+            overflow-x: auto; 
+            padding-bottom: 5px; 
         }
-
-        .tab-menu { display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 1px solid var(--border-color); overflow-x: auto; padding-bottom: 5px; }
 
         .tab-btn {
             background: none; border: none; color: #8b949e;
@@ -206,95 +206,47 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .project-list, .experience-list, .certification-list { display: flex; flex-direction: column; gap: 25px; }
-        .project-list a, .experience-list .exp-card, .certification-list .cert-card { text-decoration: none; color: inherit; display: block; }
-
-        .project-card, .exp-card, .cert-card {
+        /* 🛠️ [중요] 모든 카드 디자인 일관화 (Project = Experience = Certification) */
+        .card-list { display: flex; flex-direction: column; gap: 25px; }
+        .base-card {
             background-color: var(--card-bg); padding: 30px; border-radius: 16px;
             border: 1px solid var(--border-color); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none; color: inherit; display: block;
         }
-
-        .project-card:hover, .exp-card:hover, .cert-card:hover { transform: translateY(-5px); background-color: var(--hover-color); border-color: var(--accent-color); }
-
-        .tag {
-            display: inline-block; background: rgba(88, 166, 255, 0.1); color: var(--accent-color);
-            font-size: 1rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; margin-bottom: 15px;
-        }
-
-        .project-card h3, .exp-card h3, .cert-card h3 { margin: 0 0 10px 0; font-size: 1.4rem; }
+        .base-card:hover { transform: translateY(-5px); border-color: var(--accent-color); background-color: var(--hover-color); }
         
-        .project-tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 15px;
+        /* 🏷️ 카드 상단 태그 (글자 작게 조절) */
+        .card-tag {
+            display: inline-block; background: rgba(88, 166, 255, 0.1); color: var(--accent-color);
+            font-size: 0.85rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; margin-bottom: 15px;
         }
+        
+        /* 📝 카드 제목 (1.4rem으로 줄임) */
+        .base-card h3 { margin: 0 0 10px 0; font-size: 1.4rem; color: var(--text-color); }
+        
+        /* 📄 카드 설명 (1.1rem으로 줄임) */
+        .base-card p { margin: 0; color: #8b949e; font-size: 1.1rem; line-height: 1.6; }
+        
+        /* 🗓️ 카드 하단 날짜 (1.0rem으로 줄임) */
+        .card-period { font-size: 1.0rem; color: #58a6ff; display: block; margin-top: 15px; font-weight: 600; }
+
+        /* 🛠️ 프로젝트 전용 기술 스택 배지 */
+        .project-tech-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
         .custom-badge {
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 6px;
-            background-color: var(--badge-bg);
-            color: var(--badge-text);
-            border: 1px solid var(--badge-border);
-            transition: all 0.2s ease;
+            font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 6px;
+            background-color: var(--badge-bg); color: var(--badge-text); border: 1px solid var(--badge-border);
         }
 
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .tech-box {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 25px;
-            transition: all 0.3s ease;
-        }
-        .tech-box:hover {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 20px rgba(88, 166, 255, 0.1);
-        }
-        .tech-box h3 {
-            margin-top: 0;
-            font-size: 1.1rem;
-            color: var(--accent-color);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
+        /* Tech Stack Grid */
+        .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .tech-box { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 25px; }
+        .tech-box h3 { margin-top: 0; font-size: 1.1rem; color: var(--accent-color); margin-bottom: 15px; }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; }
         .tech-tag {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
+            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color);
+            color: var(--text-color); padding: 6px 12px; border-radius: 8px; font-size: 0.9rem;
         }
-        .tech-tag:hover {
-            background: var(--accent-color);
-            color: #fff;
-            border-color: var(--accent-color);
-            transform: scale(1.05);
-        }
-        .tech-desc {
-            font-size: 0.85rem;
-            color: #8b949e;
-            margin-top: 10px;
-            display: block;
-        }
-
-        .period { font-size: 1rem; color: #58a6ff; display: block; margin-top: 15px; font-weight: 600; }
 
         footer { text-align: center; padding: 60px 20px; border-top: 1px solid var(--border-color); color: #6e7681; }
 
@@ -316,10 +268,8 @@
         <div class="typing-container">
             <h1 class="typing-title">EunChae Portfolio</h1>
         </div>
-
         <div class="header-sub-info">
             <div class="info-text">충남대학교 전파정보통신공학과<br>고은채</div>
-            
             <div class="contact-links">
                 <div class="icon-btn" onclick="copyEmail()" title="이메일 복사 및 보내기">
                     <span id="copy-msg" class="copy-tooltip">주소가 복사되었습니다!</span>
@@ -338,138 +288,104 @@
     <div class="container">
         <section class="section">
             <div class="tab-menu">
-                <button class="tab-btn active" onclick="openTab(event, 'projects')">📁 Projects</button>
+                <button class="tab-btn active" onclick="openTab(event, 'techstack')">🛠️ Tech Stack</button>
+                <button class="tab-btn" onclick="openTab(event, 'projects')">📁 Projects</button>
                 <button class="tab-btn" onclick="openTab(event, 'experience')">🏆 Awards & Activities</button>
                 <button class="tab-btn" onclick="openTab(event, 'certifications')">📜 Certifications</button>
             </div>
 
-            <div id="projects" class="tab-content active">
-                <div class="project-list">
-                    <a href="https://github.com/eunchae-04/PokemonDex" target="_blank">
-                        <div class="project-card">
-                            <span class="tag">Web Service</span>
-                            <h3>1️⃣ 포켓몬 도감 (PokemonDex)</h3>
-                            <p style="color: #8b949e; font-size: 1.1rem;">포켓몬 API를 활용하여 데이터를 시각화하고 검색 기능을 제공하는 웹 애플리케이션.</p>
-                            <div class="project-tech-stack">
-                                <span class="custom-badge">JavaScript</span>
-                                <span class="custom-badge">React</span>
-                                <span class="custom-badge">Vite</span>
-                            </div>
-                            <span class="period">🗓️ 2025.05.19 ~ 2025.05.25</span>
+            <div id="techstack" class="tab-content active">
+                <div class="tech-grid">
+                    <div class="tech-box">
+                        <h3>💻 Frontend</h3>
+                        <div class="tech-tags">
+                            <span class="tech-tag">JavaScript</span><span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">React.js</span><span class="tech-tag">React Query</span><span class="tech-tag">Vite</span>
                         </div>
+                    </div>
+                    <div class="tech-box">
+                        <h3>⚙️ Languages</h3>
+                        <div class="tech-tags">
+                            <span class="tech-tag">C / C++</span><span class="tech-tag">Python</span><span class="tech-tag">Java</span>
+                        </div>
+                    </div>
+                    <div class="tech-box">
+                        <h3>🚀 DevOps & Tooling</h3>
+                        <div class="tech-tags">
+                            <span class="tech-tag">GitHub</span><span class="tech-tag">GitHub Actions</span><span class="tech-tag">Vercel</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="projects" class="tab-content">
+                <div class="card-list">
+                    <a href="https://github.com/eunchae-04/PokemonDex" target="_blank" class="base-card">
+                        <span class="card-tag">Web Service</span>
+                        <h3>1️⃣ 포켓몬 도감 (PokemonDex)</h3>
+                        <p>포켓몬 API를 활용하여 데이터를 시각화하고 검색 기능을 제공하는 웹 애플리케이션.</p>
+                        <div class="project-tech-stack">
+                            <span class="custom-badge">JavaScript</span><span class="custom-badge">React</span><span class="custom-badge">Vite</span>
+                        </div>
+                        <span class="card-period">🗓️ 2025.05.19 ~ 2025.05.25</span>
                     </a>
-                    <a href="https://github.com/eunchae-04/react-gift-product-detail" target="_blank">
-                        <div class="project-card">
-                            <span class="tag">Clone Coding</span>
-                            <h3>2️⃣ Kakao Gift Page Clone</h3>
-                            <p style="color: #8b949e; font-size: 1.1rem;">카카오톡 선물하기 페이지의 UI/UX를 React를 활용해 정밀하게 클론 코딩한 프로젝트.</p>
-                            <div class="project-tech-stack">
-                                <span class="custom-badge">JavaScript</span>
-                                <span class="custom-badge">TypeScript</span>
-                                <span class="custom-badge">React</span>
-                                <span class="custom-badge">Vite</span>
-                            </div>
-                            <span class="period">🗓️ 2025.06.23 ~ 2025.08.01</span>
+                    <a href="https://github.com/eunchae-04/react-gift-product-detail" target="_blank" class="base-card">
+                        <span class="card-tag">Clone Coding</span>
+                        <h3>2️⃣ Kakao Gift Page Clone</h3>
+                        <p>카카오톡 선물하기 페이지의 UI/UX를 React를 활용해 정밀하게 클론 코딩한 프로젝트.</p>
+                        <div class="project-tech-stack">
+                            <span class="custom-badge">JavaScript</span><span class="custom-badge">TypeScript</span><span class="custom-badge">React</span><span class="custom-badge">Vite</span>
                         </div>
+                        <span class="card-period">🗓️ 2025.06.23 ~ 2025.08.01</span>
                     </a>
-                    <a href="https://github.com/eunchae-04/Team19_FE" target="_blank">
-                        <div class="project-card">
-                            <span class="tag">Hybrid App</span>
-                            <h3>3️⃣ 무쉼사: 무더위 쉼터를 찾는 사람들</h3>
-                            <p style="color: #8b949e; font-size: 1.1rem;">폭염 대비 무더위 쉼터 정보와 실시간 길안내를 제공하는 하이브리드 내비게이션 서비스.</p>
-                            <div class="project-tech-stack">
-                                <span class="custom-badge">JavaScript</span>
-                                <span class="custom-badge">TypeScript</span>
-                                <span class="custom-badge">React</span>
-                                <span class="custom-badge">Vite</span>
-                            </div>
-                            <span class="period">🗓️ 2025.08 ~ 2025.11</span>
+                    <a href="https://github.com/eunchae-04/Team19_FE" target="_blank" class="base-card">
+                        <span class="card-tag">Hybrid App</span>
+                        <h3>3️⃣ 무쉼사: 무더위 쉼터를 찾는 사람들</h3>
+                        <p>폭염 대비 무더위 쉼터 정보와 실시간 길안내를 제공하는 하이브리드 내비게이션 서비스.</p>
+                        <div class="project-tech-stack">
+                            <span class="custom-badge">JavaScript</span><span class="custom-badge">TypeScript</span><span class="custom-badge">React</span><span class="custom-badge">Vite</span>
                         </div>
+                        <span class="card-period">🗓️ 2025.08 ~ 2025.11</span>
                     </a>
-                    <a href="https://github.com/eunchae-04/Line-tracking" target="_blank">
-                        <div class="project-card">
-                            <span class="tag">Embedded System</span>
-                            <h3>4️⃣ TM4C123G Line Tracer</h3>
-                            <p style="color: #8b949e; font-size: 1.1rem;">Embedded 시스템 기반으로 센서 데이터를 처리하여 주행하는 라인트레이서 제작.</p>
-                            <div class="project-tech-stack">
-                                <span class="custom-badge">C Language</span>
-                            </div>
-                            <span class="period">🗓️ 2025.11 ~ 2025.12</span>
-                        </div>
+                    <a href="https://github.com/eunchae-04/Line-tracking" target="_blank" class="base-card">
+                        <span class="card-tag">Embedded System</span>
+                        <h3>4️⃣ TM4C123G Line Tracer</h3>
+                        <p>Embedded 시스템 기반으로 센서 데이터를 처리하여 주행하는 라인트레이서 제작.</p>
+                        <div class="project-tech-stack"><span class="custom-badge">C Language</span></div>
+                        <span class="card-period">🗓️ 2025.11 ~ 2025.12</span>
                     </a>
-                    <a href="https://github.com/eunchae-04/algorithms" target="_blank">
-                        <div class="project-card">
-                            <span class="tag">Algorithm</span>
-                            <h3>5️⃣ Algorithm File Searcher</h3>
-                            <p style="color: #8b949e; font-size: 1.1rem;">다중 폴더 내에서 특정 키워드를 효율적으로 탐색하는 검색 프로그램.</p>
-                            <div class="project-tech-stack">
-                                <span class="custom-badge">Python</span>
-                            </div>
-                            <span class="period">🗓️ 2025.11 ~ 2025.12</span>
-                        </div>
+                    <a href="https://github.com/eunchae-04/algorithms" target="_blank" class="base-card">
+                        <span class="card-tag">Algorithm</span>
+                        <h3>5️⃣ Algorithm File Searcher</h3>
+                        <p>다중 폴더 내에서 특정 키워드를 효율적으로 탐색하는 검색 프로그램.</p>
+                        <div class="project-tech-stack"><span class="custom-badge">Python</span></div>
+                        <span class="card-period">🗓️ 2025.11 ~ 2025.12</span>
                     </a>
                 </div>
             </div>
 
             <div id="experience" class="tab-content">
-                <div class="experience-list">
-                    <div class="exp-card">
-                        <span class="tag">Activity</span>
+                <div class="card-list">
+                    <div class="base-card">
+                        <span class="card-tag">Activity</span>
                         <h3>💡 수상 경력 및 대외활동을 추가해주세요</h3>
-                        <p style="color: #8b949e; font-size: 1.1rem;">활동 내용이나 수상을 여기에 적으시면 됩니다.</p>
-                        <span class="period">🗓️ 202X.XX ~ 202X.XX</span>
+                        <p>활동 내용이나 수상을 여기에 적으시면 됩니다.</p>
+                        <span class="card-period">🗓️ 202X.XX ~ 202X.XX</span>
                     </div>
                 </div>
             </div>
+
             <div id="certifications" class="tab-content">
-                <div class="certification-list">
-                    <div class="cert-card">
-                        <span class="tag">License</span>
+                <div class="card-list">
+                    <div class="base-card">
+                        <span class="card-tag">License</span>
                         <h3>🏅 취득한 자격증 명칭을 적어주세요</h3>
-                        <p style="color: #8b949e; font-size: 1.1rem;">발급 기관 및 자격증에 대한 설명을 입력하세요.</p>
-                        <span class="period">🗓️ 202X.XX.XX 취득</span>
+                        <p>발급 기관 및 자격증에 대한 설명을 입력하세요.</p>
+                        <span class="card-period">🗓️ 202X.XX.XX 취득</span>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section class="section">
-            <h2>🛠️ Tech Stack</h2>
-            <div class="tech-grid">
-                <div class="tech-box">
-                    <h3>💻 Frontend</h3>
-                    <div class="tech-tags">
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">TypeScript</span>
-                        <span class="tech-tag">React.js</span>
-                        <span class="tech-tag">React Query</span>
-                        <span class="tech-tag">Vite</span>
-                    </div>
-                    <span class="tech-desc">컴포넌트 기반 웹 앱 제작 및 효율적인 데이터 관리가 가능합니다.</span>
-                </div>
-
-                <div class="tech-box">
-                    <h3>⚙️ Languages</h3>
-                    <div class="tech-tags">
-                        <span class="tech-tag">C / C++</span>
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Java</span>
-                    </div>
-                    <span class="tech-desc">알고리즘 문제 풀이 및 기초적인 시스템 프로그래밍이 가능합니다.</span>
-                </div>
-
-                <div class="tech-box">
-                    <h3>🚀 DevOps & Tooling</h3>
-                    <div class="tech-tags">
-                        <span class="tech-tag">GitHub</span>
-                        <span class="tech-tag">GitHub Actions</span>
-                        <span class="tech-tag">Vercel</span>
-                    </div>
-                    <span class="tech-desc">배포 자동화 및 CI/CD 파이프라인 구축이 가능합니다.</span>
-                </div>
-            </div>
-        </section>
-
     </div>
 
     <footer>
