@@ -78,10 +78,16 @@
             animation: fadeInUp 0.8s ease-out;
         }
 
+        /* 🛠️ 타이핑 애니메이션 */
         @keyframes typing-fix { from { max-width: 0; } to { max-width: 100%; } }
         @keyframes blink { from, to { border-color: transparent } 50% { border-color: var(--accent-color) } }
 
-        .typing-container { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+        .typing-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
         .typing-title {
             font-size: 3rem;
             font-family: 'Courier New', Courier, monospace;
@@ -95,20 +101,56 @@
             border-right: 4px solid var(--accent-color);
             width: max-content; 
             max-width: 0;
-            animation: typing-fix 3s steps(17, end) forwards, blink 0.8s infinite;
+            /* 4.5초 동안 타이핑 */
+            animation: 
+                typing-fix 4.5s steps(17, end) forwards,
+                blink 0.8s infinite;
         }
 
-        .typing-info {
+        /* 🛠️ [핵심수정] 타이핑 종료 후(4.2s 뒤) 나타나도록 딜레이 설정 */
+        .header-sub-info {
+            margin-top: 10px;
+            opacity: 0; /* 처음엔 숨김 */
+            animation: fadeInUp 1s ease-out 4.2s forwards;
+        }
+
+        .info-text {
             font-size: 1.5rem;
             font-weight: 800;
             color: var(--text-color);
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 3px solid var(--secondary-accent);
-            width: max-content;
-            max-width: 0;
-            animation: typing-fix 2.5s steps(20, end) 2s forwards, blink 0.8s infinite 2s;
+            margin-bottom: 20px;
+            line-height: 1.4;
         }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .icon-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            fill: var(--text-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+        }
+
+        .icon-btn:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            background-color: var(--hover-color);
+            fill: var(--accent-color);
+            box-shadow: 0 5px 15px rgba(88, 166, 255, 0.3);
+        }
+
+        .icon-btn svg { width: 24px; height: 24px; }
 
         .container {
             max-width: 800px;
@@ -128,88 +170,43 @@
             margin-bottom: 30px;
         }
 
-        /* 🛠️ Tab System Styles */
-        .tab-menu {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            border-bottom: 1px solid var(--border-color);
-        }
+        .tab-menu { display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 1px solid var(--border-color); }
 
         .tab-btn {
-            background: none;
-            border: none;
-            color: #8b949e;
-            padding: 10px 20px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            position: relative;
-            transition: color 0.3s;
+            background: none; border: none; color: #8b949e;
+            padding: 10px 20px; font-size: 1.1rem; font-weight: 600;
+            cursor: pointer; position: relative; transition: color 0.3s;
         }
 
-        .tab-btn.active {
-            color: var(--accent-color);
-        }
-
+        .tab-btn.active { color: var(--accent-color); }
         .tab-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: var(--accent-color);
+            content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background-color: var(--accent-color);
         }
 
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
+        .tab-content { display: none; animation: fadeIn 0.5s ease; }
+        .tab-content.active { display: block; }
 
-        .tab-content.active {
-            display: block;
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Project & Awards Cards */
         .project-list, .experience-list { display: flex; flex-direction: column; gap: 25px; }
         .project-list a, .experience-list .exp-card { text-decoration: none; color: inherit; display: block; }
 
         .project-card, .exp-card {
-            background-color: var(--card-bg);
-            padding: 30px;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background-color: var(--card-bg); padding: 30px; border-radius: 16px;
+            border: 1px solid var(--border-color); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .project-card:hover, .exp-card:hover {
-            transform: translateY(-5px);
-            background-color: var(--hover-color);
-            border-color: var(--accent-color);
-        }
+        .project-card:hover, .exp-card:hover { transform: translateY(-5px); background-color: var(--hover-color); border-color: var(--accent-color); }
 
         .tag {
-            display: inline-block;
-            background: rgba(88, 166, 255, 0.1);
-            color: var(--accent-color);
-            font-size: 1rem;
-            font-weight: 600;
-            padding: 4px 12px;
-            border-radius: 20px;
-            margin-bottom: 15px;
+            display: inline-block; background: rgba(88, 166, 255, 0.1); color: var(--accent-color);
+            font-size: 1rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; margin-bottom: 15px;
         }
 
         .project-card h3, .exp-card h3 { margin: 0 0 10px 0; font-size: 1.4rem; }
         .period { font-size: 1rem; color: #58a6ff; display: block; margin-top: 15px; font-weight: 600; }
 
-        /* Badge & Stats */
         .badge-group { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; justify-content: flex-start; }
         .stats-wrapper { display: flex; gap: 20px; justify-content: space-between; flex-wrap: wrap; }
         .stats-container {
@@ -227,7 +224,7 @@
         @media (max-width: 768px) { 
             .stats-wrapper { flex-direction: column; } 
             .typing-title { font-size: 2rem; }
-            .typing-info { font-size: 1.1rem; }
+            .info-text { font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -239,7 +236,19 @@
     <header>
         <div class="typing-container">
             <h1 class="typing-title">EunChae Portfolio</h1>
-            <div class="typing-info">충남대학교 전파정보통신공학과 고은채</div>
+        </div>
+
+        <div class="header-sub-info">
+            <div class="info-text">충남대학교 전파정보통신공학과<br>고은채</div>
+            
+            <div class="contact-links">
+                <a href="mailto:은채님메일@gmail.com" class="icon-btn" title="Email">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                </a>
+                <a href="https://github.com/eunchae-04" target="_blank" class="icon-btn" title="GitHub">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12c0-5.523-4.477-10-10-10z"/></svg>
+                </a>
+            </div>
         </div>
     </header>
 
@@ -299,11 +308,11 @@
                 <div class="experience-list">
                     <div class="exp-card">
                         <span class="tag">Activity</span>
-                        <h3>💡 대외활동 또는 수상 명칭을 적어주세요</h3>
-                        <p style="color: #8b949e; font-size: 1.1rem;">활동 내용이나 수상에 대한 간단한 설명을 여기에 입력하세요.</p>
+                        <h3>💡 수상 경력 및 대외활동을 추가해주세요</h3>
+                        <p style="color: #8b949e; font-size: 1.1rem;">활동 내용이나 수상을 여기에 적으시면 됩니다.</p>
                         <span class="period">🗓️ 202X.XX ~ 202X.XX</span>
                     </div>
-                    </div>
+                </div>
             </div>
         </section>
 
@@ -343,7 +352,6 @@
     </footer>
 
     <script>
-        // 1. 탭 전환 기능
         function openTab(evt, tabName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tab-content");
@@ -360,7 +368,6 @@
             evt.currentTarget.className += " active";
         }
 
-        // 2. 별 생성
         const starContainer = document.getElementById('star-container');
         const starCount = 100;
         for (let i = 0; i < starCount; i++) {
@@ -378,7 +385,6 @@
             starContainer.appendChild(star);
         }
 
-        // 3. 테마 전환
         const toggleBtn = document.getElementById('theme-toggle');
         const body = document.body;
         toggleBtn.addEventListener('click', () => {
