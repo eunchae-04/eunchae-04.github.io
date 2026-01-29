@@ -207,10 +207,7 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* 🛠️ [통일] 카드 디자인 시스템 */
         .card-list { display: flex; flex-direction: column; gap: 25px; }
-        
-        /* Tech Stack 카드와 Project/Activity 카드의 폰트 및 여백 완전 통일 */
         .base-card, .tech-box {
             background-color: var(--card-bg); padding: 30px; border-radius: 16px;
             border: 1px solid var(--border-color); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -226,10 +223,7 @@
             font-size: 0.85rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; margin-bottom: 15px;
         }
         
-        /* 제목 글자 크기 통일: 1.4rem */
         .base-card h3, .tech-box h3 { margin: 0 0 10px 0; font-size: 1.4rem; color: var(--text-color); font-weight: 700; }
-        
-        /* 설명 글자 크기 통일: 1.1rem */
         .base-card p, .tech-desc { margin: 0; color: #8b949e; font-size: 1.1rem; line-height: 1.6; }
         
         .card-period { font-size: 1.0rem; color: #58a6ff; display: block; margin-top: 15px; font-weight: 600; }
@@ -240,12 +234,9 @@
             background-color: var(--badge-bg); color: var(--badge-text); border: 1px solid var(--badge-border);
         }
 
-        /* Tech Stack 전용 */
+        /* Tech Stack 배지 이미지 스타일 */
         .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-        .tech-tag {
-            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color);
-            color: var(--text-color); padding: 6px 12px; border-radius: 8px; font-size: 0.9rem;
-        }
+        .tech-tags img { height: 28px; }
         .tech-desc { display: block; margin-top: 12px; }
 
         footer { text-align: center; padding: 60px 20px; border-top: 1px solid var(--border-color); color: #6e7681; }
@@ -299,22 +290,30 @@
                     <div class="tech-box">
                         <h3>💻 Frontend</h3>
                         <div class="tech-tags">
-                            <span class="tech-tag">JavaScript</span><span class="tech-tag">TypeScript</span>
-                            <span class="tech-tag">React.js</span><span class="tech-tag">React Query</span><span class="tech-tag">Vite</span>
+                            <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black">
+                            <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white">
+                            <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black">
+                            <img src="https://img.shields.io/badge/React_Query-FF4154?style=for-the-badge&logo=ReactQuery&logoColor=white">
+                            <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=Vite&logoColor=white">
                         </div>
                         <span class="tech-desc">컴포넌트 기반 웹 앱 제작 및 효율적인 데이터 상태 관리가 가능합니다.</span>
                     </div>
                     <div class="tech-box">
                         <h3>⚙️ Languages</h3>
                         <div class="tech-tags">
-                            <span class="tech-tag">C / C++</span><span class="tech-tag">Python</span><span class="tech-tag">Java</span>
+                            <img src="https://img.shields.io/badge/C-A8B9CC?style=for-the-badge&logo=C&logoColor=white">
+                            <img src="https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=C%2B%2B&logoColor=white">
+                            <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white">
+                            <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white">
                         </div>
                         <span class="tech-desc">알고리즘 문제 풀이 및 기초적인 시스템 프로그래밍이 가능합니다.</span>
                     </div>
                     <div class="tech-box">
                         <h3>🚀 DevOps & Tooling</h3>
                         <div class="tech-tags">
-                            <span class="tech-tag">GitHub</span><span class="tech-tag">GitHub Actions</span><span class="tech-tag">Vercel</span>
+                            <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white">
+                            <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=GitHubActions&logoColor=white">
+                            <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=Vercel&logoColor=white">
                         </div>
                         <span class="tech-desc">배포 자동화 및 CI/CD 파이프라인 구축 및 호스팅이 가능합니다.</span>
                     </div>
