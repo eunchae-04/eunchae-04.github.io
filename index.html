@@ -180,7 +180,7 @@
             animation: fadeInUp 1s ease-out;
         }
 
-         .tab-menu { 
+        .tab-menu { 
             display: flex; 
             width: 100%; 
             margin-bottom: 35px; 
@@ -203,10 +203,20 @@
             content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2.5px; background-color: var(--accent-color);
         }
 
-        .tab-content { display: none; animation: fadeIn 0.5s ease; }
-        .tab-content.active { display: block; }
+        /* 탭 콘텐츠 전환 효과 */
+        .tab-content { 
+            display: none; 
+            opacity: 0; 
+            transform: translateY(15px); 
+            transition: opacity 0.8s ease, transform 0.8s ease; 
+        }
+        .tab-content.active { 
+            display: block; 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         .card-list { display: flex; flex-direction: column; gap: 25px; }
         .base-card, .tech-box {
@@ -229,36 +239,29 @@
         
         .card-period { font-size: 1.0rem; color: #58a6ff; display: block; margin-top: 15px; font-weight: 600; }
 
-        /* 🛠️ [공통] 기술 스택 배지 이미지 스타일 */
-        .tech-tags, .project-tech-stack { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 8px; 
-            margin-top: 15px;
-            margin-bottom: 12px; 
+        .project-tech-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+        .custom-badge {
+            font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 6px;
+            background-color: var(--badge-bg); color: var(--badge-text); border: 1px solid var(--badge-border);
         }
-        .tech-tags img, .project-tech-stack img { height: 26px; }
 
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+        .tech-tags img, .project-tech-stack img { height: 26px; }
         .tech-desc { display: block; margin-top: 12px; }
 
         footer { text-align: center; padding: 60px 20px; border-top: 1px solid var(--border-color); color: #6e7681; }
-
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 768px) { 
             .typing-title { font-size: 1.8rem; }
             .info-text { font-size: 1.1rem; }
             .tab-btn { font-size: 0.8rem; }
-            
-            /* 카드 내부 요소 크기 줄이기 */
             .base-card, .tech-box { padding: 20px; }
             .base-card h3, .tech-box h3 { font-size: 1.1rem; }
             .base-card p, .tech-desc { font-size: 0.9rem; }
             .card-period { font-size: 0.85rem; }
-            .tech-tags img { height: 22px; }
+            .tech-tags img, .project-tech-stack img { height: 22px; }
             .custom-badge { font-size: 0.65rem; padding: 3px 8px; }
         }
-
     </style>
 </head>
 <body data-theme="dark">
@@ -428,20 +431,30 @@
             window.location.href = `mailto:${email}?subject=[Portfolio Inquiry] 안녕하세요 고은채님!`;
         }
 
+        // 애니메이션 지원을 위한 openTab 함수 수정
         function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
+            const tabcontent = document.getElementsByClassName("tab-content");
+            const tablinks = document.getElementsByClassName("tab-btn");
+
+            // 모든 탭의 active 클래스를 즉시 제거하여 초기화
+            for (let i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].classList.remove("active");
+                tabcontent[i].style.display = "none";
             }
-            tablinks = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            for (let i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
             }
-            document.getElementById(tabName).style.display = "block";
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.className += " active";
+
+            // 선택된 탭 표시
+            const targetTab = document.getElementById(tabName);
+            targetTab.style.display = "block";
+            
+            // 약간의 지연을 주어 CSS 트랜지션(Fade-in)이 작동하게 함
+            setTimeout(() => {
+                targetTab.classList.add("active");
+            }, 10);
+
+            evt.currentTarget.classList.add("active");
         }
 
         const starContainer = document.getElementById('star-container');
