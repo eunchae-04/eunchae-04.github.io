@@ -180,22 +180,21 @@
             animation: fadeInUp 1s ease-out;
         }
 
-        /* 🛠️ [수정] 탭 메뉴 4등분 및 좌우 꽉 채우기 */
         .tab-menu { 
             display: flex; 
-            width: 100%; /* 컨테이너 폭에 맞춤 */
+            width: 100%; 
             margin-bottom: 35px; 
             border-bottom: 1px solid var(--border-color); 
             padding: 0;
         }
 
         .tab-btn {
-            flex: 1; /* 모든 버튼이 동일한 비율(1/4)을 갖도록 설정 */
+            flex: 1; 
             background: none; border: none; color: #8b949e;
-            padding: 15px 0; /* 좌우 패딩 대신 상하 패딩만 주어 균형 조절 */
+            padding: 15px 0; 
             font-size: 1rem; font-weight: 600;
             cursor: pointer; position: relative; transition: color 0.3s;
-            text-align: center; /* 텍스트 중앙 정렬 */
+            text-align: center; 
         }
 
         .tab-btn.active { color: var(--accent-color); }
@@ -208,23 +207,30 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* 카드 디자인 */
+        /* 🛠️ [통일] 카드 디자인 시스템 */
         .card-list { display: flex; flex-direction: column; gap: 25px; }
-        .base-card {
+        
+        /* Tech Stack 카드와 Project/Activity 카드의 폰트 및 여백 완전 통일 */
+        .base-card, .tech-box {
             background-color: var(--card-bg); padding: 30px; border-radius: 16px;
             border: 1px solid var(--border-color); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-decoration: none; color: inherit; display: block;
         }
-        .base-card:hover { transform: translateY(-5px); border-color: var(--accent-color); background-color: var(--hover-color); }
+        .base-card:hover, .tech-box:hover { 
+            transform: translateY(-5px); border-color: var(--accent-color); background-color: var(--hover-color); 
+        }
         
         .card-tag {
             display: inline-block; background: rgba(88, 166, 255, 0.1); color: var(--accent-color);
             font-size: 0.85rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; margin-bottom: 15px;
         }
         
-        .base-card h3 { margin: 0 0 10px 0; font-size: 1.4rem; color: var(--text-color); }
-        .base-card p { margin: 0; color: #8b949e; font-size: 1.1rem; line-height: 1.6; }
+        /* 제목 글자 크기 통일: 1.4rem */
+        .base-card h3, .tech-box h3 { margin: 0 0 10px 0; font-size: 1.4rem; color: var(--text-color); font-weight: 700; }
+        
+        /* 설명 글자 크기 통일: 1.1rem */
+        .base-card p, .tech-desc { margin: 0; color: #8b949e; font-size: 1.1rem; line-height: 1.6; }
         
         .card-period { font-size: 1.0rem; color: #58a6ff; display: block; margin-top: 15px; font-weight: 600; }
 
@@ -234,15 +240,13 @@
             background-color: var(--badge-bg); color: var(--badge-text); border: 1px solid var(--badge-border);
         }
 
-        .tech-grid { display: grid; grid-template-columns: 1fr; gap: 20px; } /* 탭 안에 들어가므로 1열로 배치 권장 */
-        .tech-box { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 25px; }
-        .tech-box h3 { margin: 0 0 15px 0; font-size: 1.1rem; color: var(--accent-color); }
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        /* Tech Stack 전용 */
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
         .tech-tag {
             background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color);
             color: var(--text-color); padding: 6px 12px; border-radius: 8px; font-size: 0.9rem;
         }
-        .tech-desc { font-size: 0.85rem; color: #8b949e; margin-top: 12px; display: block; line-height: 1.5; }
+        .tech-desc { display: block; margin-top: 12px; }
 
         footer { text-align: center; padding: 60px 20px; border-top: 1px solid var(--border-color); color: #6e7681; }
 
@@ -251,7 +255,7 @@
         @media (max-width: 768px) { 
             .typing-title { font-size: 1.8rem; }
             .info-text { font-size: 1.1rem; }
-            .tab-btn { font-size: 0.8rem; } /* 모바일에서 글자 크기 살짝 줄임 */
+            .tab-btn { font-size: 0.8rem; }
         }
     </style>
 </head>
