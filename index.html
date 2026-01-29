@@ -229,15 +229,16 @@
         
         .card-period { font-size: 1.0rem; color: #58a6ff; display: block; margin-top: 15px; font-weight: 600; }
 
-        .project-tech-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
-        .custom-badge {
-            font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 6px;
-            background-color: var(--badge-bg); color: var(--badge-text); border: 1px solid var(--badge-border);
+        /* 🛠️ [공통] 기술 스택 배지 이미지 스타일 */
+        .tech-tags, .project-tech-stack { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 8px; 
+            margin-top: 15px;
+            margin-bottom: 12px; 
         }
+        .tech-tags img, .project-tech-stack img { height: 26px; }
 
-        /* Tech Stack 배지 이미지 스타일 */
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-        .tech-tags img { height: 28px; }
         .tech-desc { display: block; margin-top: 12px; }
 
         footer { text-align: center; padding: 60px 20px; border-top: 1px solid var(--border-color); color: #6e7681; }
@@ -248,6 +249,7 @@
             .typing-title { font-size: 1.8rem; }
             .info-text { font-size: 1.1rem; }
             .tab-btn { font-size: 0.8rem; }
+            .tech-tags img, .project-tech-stack img { height: 22px; }
         }
     </style>
 </head>
@@ -328,7 +330,9 @@
                         <h3>1️⃣ 포켓몬 도감 (PokemonDex)</h3>
                         <p>포켓몬 API를 활용하여 데이터를 시각화하고 검색 기능을 제공하는 웹 애플리케이션.</p>
                         <div class="project-tech-stack">
-                            <span class="custom-badge">JavaScript</span><span class="custom-badge">React</span><span class="custom-badge">Vite</span>
+                            <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black">
+                            <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black">
+                            <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=Vite&logoColor=white">
                         </div>
                         <span class="card-period">🗓️ 2025.05.19 ~ 2025.05.25</span>
                     </a>
@@ -337,7 +341,10 @@
                         <h3>2️⃣ Kakao Gift Page Clone</h3>
                         <p>카카오톡 선물하기 페이지의 UI/UX를 React를 활용해 정밀하게 클론 코딩한 프로젝트.</p>
                         <div class="project-tech-stack">
-                            <span class="custom-badge">JavaScript</span><span class="custom-badge">TypeScript</span><span class="custom-badge">React</span><span class="custom-badge">Vite</span>
+                            <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black">
+                            <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white">
+                            <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black">
+                            <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=Vite&logoColor=white">
                         </div>
                         <span class="card-period">🗓️ 2025.06.23 ~ 2025.08.01</span>
                     </a>
@@ -346,7 +353,10 @@
                         <h3>3️⃣ 무쉼사: 무더위 쉼터를 찾는 사람들</h3>
                         <p>폭염 대비 무더위 쉼터 정보와 실시간 길안내를 제공하는 하이브리드 내비게이션 서비스.</p>
                         <div class="project-tech-stack">
-                            <span class="custom-badge">JavaScript</span><span class="custom-badge">TypeScript</span><span class="custom-badge">React</span><span class="custom-badge">Vite</span>
+                            <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black">
+                            <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white">
+                            <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black">
+                            <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=Vite&logoColor=white">
                         </div>
                         <span class="card-period">🗓️ 2025.08 ~ 2025.11</span>
                     </a>
@@ -354,14 +364,18 @@
                         <span class="card-tag">Embedded System</span>
                         <h3>4️⃣ TM4C123G Line Tracer</h3>
                         <p>Embedded 시스템 기반으로 센서 데이터를 처리하여 주행하는 라인트레이서 제작.</p>
-                        <div class="project-tech-stack"><span class="custom-badge">C Language</span></div>
+                        <div class="project-tech-stack">
+                            <img src="https://img.shields.io/badge/C-A8B9CC?style=for-the-badge&logo=C&logoColor=white">
+                        </div>
                         <span class="card-period">🗓️ 2025.11 ~ 2025.12</span>
                     </a>
                     <a href="https://github.com/eunchae-04/algorithms" target="_blank" class="base-card">
                         <span class="card-tag">Algorithm</span>
                         <h3>5️⃣ Algorithm File Searcher</h3>
                         <p>다중 폴더 내에서 특정 키워드를 효율적으로 탐색하는 검색 프로그램.</p>
-                        <div class="project-tech-stack"><span class="custom-badge">Python</span></div>
+                        <div class="project-tech-stack">
+                            <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white">
+                        </div>
                         <span class="card-period">🗓️ 2025.11 ~ 2025.12</span>
                     </a>
                 </div>
