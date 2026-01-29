@@ -14,6 +14,10 @@
             --border-color: #30363d;
             --hover-color: #1c2128;
             --star-color: #ffffff;
+            /* 🛠️ 커스텀 배지용 변수 추가 */
+            --badge-bg: rgba(88, 166, 255, 0.1);
+            --badge-text: #58a6ff;
+            --badge-border: rgba(88, 166, 255, 0.3);
         }
 
         [data-theme="light"] {
@@ -25,6 +29,9 @@
             --border-color: #d0d7de;
             --hover-color: #f3f4f6;
             --star-color: #58a6ff;
+            --badge-bg: rgba(9, 105, 218, 0.08);
+            --badge-text: #0969da;
+            --badge-border: rgba(9, 105, 218, 0.2);
         }
 
         body {
@@ -217,15 +224,27 @@
 
         .project-card h3, .exp-card h3 { margin: 0 0 10px 0; font-size: 1.4rem; }
         
-        /* 🛠️ 프로젝트 카드용 내부 기술 스택 정렬 */
+        /* 🛠️ [커스텀 수정] 프로젝트 내부 기술 스택 디자인 */
         .project-tech-stack {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
             margin-top: 15px;
         }
-        .project-tech-stack img {
-            height: 22px;
+        .custom-badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background-color: var(--badge-bg);
+            color: var(--badge-text);
+            border: 1px solid var(--badge-border);
+            transition: all 0.2s ease;
+        }
+        .custom-badge:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: scale(1.05);
         }
 
         .period { font-size: 1rem; color: #58a6ff; display: block; margin-top: 15px; font-weight: 600; }
@@ -294,9 +313,9 @@
                             <h3>1️⃣ 포켓몬 도감 (PokemonDex)</h3>
                             <p style="color: #8b949e; font-size: 1.1rem;">포켓몬 API를 활용하여 데이터를 시각화하고 검색 기능을 제공하는 웹 애플리케이션.</p>
                             <div class="project-tech-stack">
-                                <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black">
-                                <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black">
-                                <img src="https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white">
+                                <span class="custom-badge">JavaScript</span>
+                                <span class="custom-badge">React</span>
+                                <span class="custom-badge">Vite</span>
                             </div>
                             <span class="period">🗓️ 2025.05.19 ~ 2025.05.25</span>
                         </div>
@@ -308,10 +327,10 @@
                             <h3>2️⃣ Kakao Gift Page Clone</h3>
                             <p style="color: #8b949e; font-size: 1.1rem;">카카오톡 선물하기 페이지의 UI/UX를 React를 활용해 정밀하게 클론 코딩한 프로젝트.</p>
                             <div class="project-tech-stack">
-                                <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black">
-                                <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white">
-                                <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black">
-                                <img src="https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white">
+                                <span class="custom-badge">JavaScript</span>
+                                <span class="custom-badge">TypeScript</span>
+                                <span class="custom-badge">React</span>
+                                <span class="custom-badge">Vite</span>
                             </div>
                             <span class="period">🗓️ 2025.06.23 ~ 2025.08.01</span>
                         </div>
@@ -323,10 +342,10 @@
                             <h3>3️⃣ 무쉼사: 무더위 쉼터를 찾는 사람들</h3>
                             <p style="color: #8b949e; font-size: 1.1rem;">폭염 대비 무더위 쉼터 정보와 실시간 길안내를 제공하는 하이브리드 내비게이션 서비스.</p>
                             <div class="project-tech-stack">
-                                <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black">
-                                <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white">
-                                <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black">
-                                <img src="https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white">
+                                <span class="custom-badge">JavaScript</span>
+                                <span class="custom-badge">TypeScript</span>
+                                <span class="custom-badge">React</span>
+                                <span class="custom-badge">Vite</span>
                             </div>
                             <span class="period">🗓️ 2025.08 ~ 2025.11</span>
                         </div>
@@ -338,7 +357,7 @@
                             <h3>4️⃣ TM4C123G Line Tracer</h3>
                             <p style="color: #8b949e; font-size: 1.1rem;">Embedded 시스템 기반으로 센서 데이터를 처리하여 주행하는 라인트레이서 제작.</p>
                             <div class="project-tech-stack">
-                                <img src="https://img.shields.io/badge/C-A8B9CC?style=flat-square&logo=c&logoColor=white">
+                                <span class="custom-badge">C Language</span>
                             </div>
                             <span class="period">🗓️ 2025.11 ~ 2025.12</span>
                         </div>
@@ -350,7 +369,7 @@
                             <h3>5️⃣ Algorithm File Searcher</h3>
                             <p style="color: #8b949e; font-size: 1.1rem;">다중 폴더 내에서 특정 키워드를 효율적으로 탐색하는 검색 프로그램.</p>
                             <div class="project-tech-stack">
-                                <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white">
+                                <span class="custom-badge">Python</span>
                             </div>
                             <span class="period">🗓️ 2025.11 ~ 2025.12</span>
                         </div>
